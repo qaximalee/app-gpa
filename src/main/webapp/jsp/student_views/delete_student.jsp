@@ -1,12 +1,14 @@
-<%@page import="com.ihsinformatics.gpaconvertor.services.StudentService, com.ihsinformatics.gpaconvertor.entities.Student,
- com.ihsinformatics.gpaconvertor.interfaces.ICrudOperations"%>  
-<jsp:useBean id="std" class="com.ihsinformatics.gpaconvertor.entities.Student"></jsp:useBean>  
+<%@page import="com.ihsinformatics.gpaconvertor.hbentities.Student"%>
+<%@page import="com.ihsinformatics.gpaconvertor.hbservices.StudentDAO"%>
+<%@page import="com.ihsinformatics.gpaconvertor.interfaces.HCrudOperations"%>
+ 
+<jsp:useBean id="std" class="com.ihsinformatics.gpaconvertor.hbentities.Student"></jsp:useBean>  
 <jsp:setProperty property="*" name="std"/>  
 <%  
 String strId = request.getParameter("id");
-ICrudOperations<Student> stdOprt = new StudentService();
+HCrudOperations<Student> hStdOprt = new StudentDAO();
 
-if(stdOprt.delete(Integer.parseInt(strId))){
+if(hStdOprt.delete(Integer.parseInt(strId))){
 	String str = "from-delete";
 	response.sendRedirect("view_students.jsp?from="+str);
 }else

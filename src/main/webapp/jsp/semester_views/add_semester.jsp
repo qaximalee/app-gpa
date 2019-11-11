@@ -1,16 +1,16 @@
 <%@page
-	import="com.ihsinformatics.gpaconvertor.services.SemesterService,
-	com.ihsinformatics.gpaconvertor.interfaces.ICrudOperations,
-	com.ihsinformatics.gpaconvertor.entities.Semester"
+	import="com.ihsinformatics.gpaconvertor.hbservices.SemesterDAO,
+	com.ihsinformatics.gpaconvertor.interfaces.HCrudOperations,
+	com.ihsinformatics.gpaconvertor.hbentities.Semester"
 %>
-<jsp:useBean id="std"
-	class="com.ihsinformatics.gpaconvertor.entities.Semester"></jsp:useBean>
-<jsp:setProperty property="*" name="std" />
+<jsp:useBean id="sem"
+	class="com.ihsinformatics.gpaconvertor.hbentities.Semester"></jsp:useBean>
+<jsp:setProperty property="*" name="sem" />
 
 <%
-	ICrudOperations<Semester> semesterService = new SemesterService();
+	HCrudOperations<Semester> semesterService = new SemesterDAO();
 	
-	if (semesterService.save(std)) {
+	if (semesterService.save(sem)) {
 		String str = "from-create";
 		response.sendRedirect("view_semesters.jsp?from="+str);
 	} 

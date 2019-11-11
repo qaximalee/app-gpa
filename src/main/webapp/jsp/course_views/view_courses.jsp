@@ -17,8 +17,9 @@
 <body>
 <jsp:include page="../header/nav_bar.jsp"></jsp:include>
 	<%@page
-		import="com.ihsinformatics.gpaconvertor.services.CourseService, com.ihsinformatics.gpaconvertor.entities.Course,
- com.ihsinformatics.gpaconvertor.interfaces.ICrudOperations, java.util.List"%>
+		import="com.ihsinformatics.gpaconvertor.hbservices.CourseDAO, 
+		com.ihsinformatics.gpaconvertor.hbentities.Course,
+ com.ihsinformatics.gpaconvertor.interfaces.HCrudOperations, java.util.List"%>
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 
@@ -28,7 +29,7 @@
 			<input type="hidden" id="fromRequest" value="<%= request.getParameter("from") %>">
 	<%		
 		} 
-		ICrudOperations<Course> courseOprt = new CourseService();
+		HCrudOperations<Course> courseOprt = new CourseDAO();
 
 		List<Course> list = courseOprt.getAll();
 		request.setAttribute("list", list);
@@ -50,7 +51,7 @@
 						<td>${std.getCourseId()}</td>
 						<td>${std.getCourseCode()}</td>
 						<td>${std.getName()}</td>
-						<td>${std.getSemesterId()}</td>
+						<td>${std.getSemester().getSemesterNo()}</td>
 						<td><a href="edit_course_form.jsp?id=${std.getCourseId()}">Edit</a></td>
 						<td><a href="delete_course.jsp?id=${std.getCourseId()}">Delete</a></td>
 					</tr>

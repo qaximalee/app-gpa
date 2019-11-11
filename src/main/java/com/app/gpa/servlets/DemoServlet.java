@@ -41,7 +41,21 @@ public class DemoServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+		// doGet(request, response);
+		System.out.println("Values of Course Form: ---------------");
+		System.out.println("Course Code: " + request.getParameter("courseCode"));
+		System.out.println("Course Name: " + request.getParameter("name"));
+		System.out.println("Course Semester: " + request.getParameter("semester"));
 
+		System.out.println(request.getContextPath());
+
+		String url = request.getPathTranslated();
+		System.out.println("Url: " + url);
+
+		String url1 = request.getRequestURL().toString();
+		String queryString = request.getQueryString();
+
+		System.out.println("queryString: " + url1);
+
+	}
 }

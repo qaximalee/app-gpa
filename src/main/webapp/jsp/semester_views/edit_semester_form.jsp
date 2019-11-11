@@ -14,12 +14,12 @@
 <body>
 <jsp:include page="../header/nav_bar.jsp"></jsp:include>
 	<%@page
-		import="com.ihsinformatics.gpaconvertor.services.SemesterService, com.ihsinformatics.gpaconvertor.entities.Semester,
- com.ihsinformatics.gpaconvertor.interfaces.ICrudOperations"%>
+		import="com.ihsinformatics.gpaconvertor.hbservices.SemesterDAO, com.ihsinformatics.gpaconvertor.hbentities.Semester,
+ com.ihsinformatics.gpaconvertor.interfaces.HCrudOperations"%>
 
 	<%
 		String id = request.getParameter("id");
-		ICrudOperations<Semester> semesterOprt = new SemesterService();
+		HCrudOperations<Semester> semesterOprt = new SemesterDAO();
 		Semester std = semesterOprt.getSingle(Integer.parseInt(id));
 	%>
 	<div class="container">

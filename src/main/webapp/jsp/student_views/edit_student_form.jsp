@@ -14,13 +14,15 @@
 <body>
 <jsp:include page="../header/nav_bar.jsp"></jsp:include>
 	<%@page
-		import="com.ihsinformatics.gpaconvertor.services.StudentService, com.ihsinformatics.gpaconvertor.entities.Student,
- com.ihsinformatics.gpaconvertor.interfaces.ICrudOperations"%>
+		import="com.ihsinformatics.gpaconvertor.hbservices.StudentDAO, com.ihsinformatics.gpaconvertor.hbentities.Student,
+ com.ihsinformatics.gpaconvertor.interfaces.HCrudOperations"%>
 
 	<%
 		String id = request.getParameter("id");
-		ICrudOperations<Student> stdOprt = new StudentService();
+		HCrudOperations<Student> stdOprt = new StudentDAO();
 		Student std = stdOprt.getSingle(Integer.parseInt(id));
+		
+		
 	%>
 	<div class="container">
 		<h1>Edit Form</h1>

@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 
+<%@page import="com.ihsinformatics.gpaconvertor.hbentities.Student"%>
+<%@page import="java.util.List"%>
+<%@page import="com.ihsinformatics.gpaconvertor.hbservices.StudentDAO"%>
+<%@page import="com.ihsinformatics.gpaconvertor.interfaces.HCrudOperations"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -20,9 +24,7 @@
 </head>
 <body>
 	<jsp:include page="../header/nav_bar.jsp"></jsp:include>
-	<%@page
-		import="com.ihsinformatics.gpaconvertor.services.StudentService, com.ihsinformatics.gpaconvertor.entities.Student,
- com.ihsinformatics.gpaconvertor.interfaces.ICrudOperations, java.util.List"%>
+	
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 
@@ -33,11 +35,10 @@
 		value="<%= request.getParameter("from") %>">
 	<%		
 		} 
-	
-		ICrudOperations<Student> stdOprt = new StudentService();
-
-		List<Student> list = stdOprt.getAll();
-		request.setAttribute("list", list);
+			
+		HCrudOperations<Student> hStdOprt = new StudentDAO();
+		List<Student> hStdList = hStdOprt.getAll();
+		request.setAttribute("list", hStdList);
 	%>
 
 	<div class="container">

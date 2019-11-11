@@ -1,9 +1,9 @@
-<%@page import="com.ihsinformatics.gpaconvertor.services.SemesterService, com.ihsinformatics.gpaconvertor.entities.Semester,
- com.ihsinformatics.gpaconvertor.interfaces.ICrudOperations"%>  
+<%@page import="com.ihsinformatics.gpaconvertor.hbservices.SemesterDAO, com.ihsinformatics.gpaconvertor.hbentities.Semester,
+ com.ihsinformatics.gpaconvertor.interfaces.HCrudOperations"%>  
 
 <%  
 String strId = request.getParameter("id");
-ICrudOperations<Semester> semesterOprt = new SemesterService();
+HCrudOperations<Semester> semesterOprt = new SemesterDAO();
 
 if(semesterOprt.delete(Integer.parseInt(strId))){
 	String str = "from-delete";
