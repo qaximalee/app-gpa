@@ -47,8 +47,8 @@
 			request.setAttribute("semesterList", semesterList);
 		%>
 
-		<form action="add_course_results.jsp" method="post">
-
+		<form action="../../CourseResultsServlet" method="post">
+			<input type="hidden" name="actionType" value="add"/>
 			<div class="form-group">
 				<label for="studentId">Student Id:</label> <select name="studentId" id="studentId" onchange="getStudent()"
 					required>

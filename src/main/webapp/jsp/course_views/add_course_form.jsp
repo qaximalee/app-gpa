@@ -30,6 +30,7 @@
 		<h1>Add Course</h1>
 
 		<form action="../../CourseServlet" method="post">
+			<input type="hidden" name="actionType" value="add"/>
 			<div class="form-group">
 				<label for="courseCode">Course Code:</label> <input type="text"
 					class="form-control" id="courseCode" placeholder="Enter CourseCode"

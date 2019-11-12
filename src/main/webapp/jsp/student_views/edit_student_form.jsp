@@ -26,7 +26,8 @@
 	%>
 	<div class="container">
 		<h1>Edit Form</h1>
-		<form action="edit_student.jsp" method="post">
+		<form action="../../StudentServlet" method="get">
+			<input type="hidden" name="actionType" value="edit"/>
 			<input type="hidden" name="studentId" value="<%=std.getStudentId()%>" />
 			<div class="form-group">
 				<label for="firstName">First Name:</label> <input type="text"

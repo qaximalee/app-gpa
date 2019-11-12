@@ -69,7 +69,7 @@
 						<td>${courseResults.getTotalPoints()}</td>
 						
 						<td><a
-							href="delete_course_results.jsp?id=${courseResults.getCourseResultId()}"
+							href="../../CourseResultsServlet?actionType=delete&id=${courseResults.getCourseResultId()}"
 							id="delete">Delete</a></td>
 					</tr>
 				</c:forEach>

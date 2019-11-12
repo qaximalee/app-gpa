@@ -37,7 +37,8 @@
 	<div class="container">
 		<h1>Edit Course</h1>
 
-		<form action="edit_course.jsp" method="post">
+		<form action="../../CourseServlet" method="get">
+			<input type="hidden" name="actionType" value="edit"/>
 			<input type="hidden" name="courseId"
 				value="<%=course.getCourseId()%>" />
 			<div class="form-group">

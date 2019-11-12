@@ -53,7 +53,7 @@
 						<td>${std.getName()}</td>
 						<td>${std.getSemester().getSemesterNo()}</td>
 						<td><a href="edit_course_form.jsp?id=${std.getCourseId()}">Edit</a></td>
-						<td><a href="delete_course.jsp?id=${std.getCourseId()}">Delete</a></td>
+						<td><a href="../../CourseServlet?actionType=delete&id=${std.getCourseId()}">Delete</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -66,11 +66,20 @@
 		if(fromRequest == "from-create"){
 			alertify.success('Course Added');
 			document.getElementById("fromRequest").value = null;
+		}else if(fromRequest == "from-create-error"){
+			alertify.error('Course is not Created');
+			document.getElementById("fromRequest").value = null;
 		}else if( fromRequest == "from-edit"){
 			alertify.success('Course Updated');
 			document.getElementById("fromRequest").value = null;
+		}else if(fromRequest == "from-edit-error"){
+			alertify.error('Course is not Updated');
+			document.getElementById("fromRequest").value = null;
 		}else if( fromRequest == "from-delete"){
 			alertify.error('Course Deleted');
+			document.getElementById("fromRequest").value = null;
+		}else if(fromRequest == "from-delete-error"){
+			alertify.error('Course is not Deleted');
 			document.getElementById("fromRequest").value = null;
 		}
 	</script>

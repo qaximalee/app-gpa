@@ -24,8 +24,9 @@
 		<br />
 
 		<h1>Add New Student</h1>
-		<form action="add_student.jsp" method="post" name="studentForm"
+		<form action="../../StudentServlet" method="post" name="studentForm"
 			id="studentForm" onsubmit="return getValidated()">
+			<input type="hidden" name="actionType" value="add"/>
 			<div class="form-group">
 				<label for="firstName">First Name:</label> <input type="text"
 					class="form-control" id="firstName" placeholder="Enter First Name"

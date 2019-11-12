@@ -60,7 +60,7 @@
 						<td>${std.getLastName()}</td>
 						<td>${std.getRegistrationNo()}</td>
 						<td><a href="edit_student_form.jsp?id=${std.getStudentId()}">Edit</a></td>
-						<td id="delete-student" onclick="deleteARecord()")><a href="delete_student.jsp?id=${std.getStudentId()}">Delete</a></td>
+						<td id="delete-student" onclick="deleteARecord()")><a href="../../StudentServlet?actionType=delete&id=${std.getStudentId()}">Delete</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -82,11 +82,20 @@
 		if(fromRequest == "from-create"){
 			alertify.success('Student Added');
 			document.getElementById("fromRequest").value = null;
+		}else if(fromRequest == "from-create-error"){
+			alertify.error('Student is not Created');
+			document.getElementById("fromRequest").value = null;
 		}else if( fromRequest == "from-edit"){
 			alertify.success('Student Updated');
 			document.getElementById("fromRequest").value = null;
+		}else if(fromRequest == "from-edit-error"){
+			alertify.error('Student is not Updated');
+			document.getElementById("fromRequest").value = null;
 		}else if( fromRequest == "from-delete"){
 			alertify.error('Student Deleted');
+			document.getElementById("fromRequest").value = null;
+		}else if(fromRequest == "from-delete-error"){
+			alertify.error('Student is not Deleted');
 			document.getElementById("fromRequest").value = null;
 		}
 	</script>

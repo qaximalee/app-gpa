@@ -24,7 +24,8 @@
 	%>
 	<div class="container">
 		<h1>Edit Form</h1>
-		<form action="edit_semester.jsp" method="post">
+		<form action="../../SemesterServlet" method="get">
+			<input type="hidden" name="actionType" value="edit"/>
 			<input type="hidden" name="semesterId"
 				value="<%=std.getSemesterId()%>" />
 			<div class="form-group">

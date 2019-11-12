@@ -51,7 +51,7 @@
 						<td>${std.getSemesterNo()}</td>
 						<td><a
 							href="edit_semester_form.jsp?id=${std.getSemesterId()}">Edit</a></td>
-						<td><a href="delete_semester.jsp?id=${std.getSemesterId()}">Delete</a></td>
+						<td><a href="../../SemesterServlet?actionType=delete&id=${std.getSemesterId()}">Delete</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -63,11 +63,20 @@
 		if(fromRequest == "from-create"){
 			alertify.success('Semester Added');
 			document.getElementById("fromRequest").value = null;
+		}else if(fromRequest == "from-create-error"){
+			alertify.error('Semester is not Created');
+			document.getElementById("fromRequest").value = null;
 		}else if( fromRequest == "from-edit"){
 			alertify.success('Semester Updated');
 			document.getElementById("fromRequest").value = null;
+		}else if(fromRequest == "from-edit-error"){
+			alertify.error('Semester is not Updated');
+			document.getElementById("fromRequest").value = null;
 		}else if( fromRequest == "from-delete"){
 			alertify.error('Semester Deleted');
+			document.getElementById("fromRequest").value = null;
+		}else if(fromRequest == "from-delete-error"){
+			alertify.error('Semester is not Deleted');
 			document.getElementById("fromRequest").value = null;
 		}
 	</script>
