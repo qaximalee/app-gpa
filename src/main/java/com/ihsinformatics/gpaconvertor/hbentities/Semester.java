@@ -18,6 +18,9 @@ public class Semester {
 
 	@Column(name = "semester_no")
 	private int semesterNo;
+	//
+	// @OneToMany(mappedBy = "semester")
+	// private List<SemesterResults> semesterResults = new ArrayList<>();
 
 	public Semester() {
 	}

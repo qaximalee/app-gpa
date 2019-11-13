@@ -116,4 +116,5 @@ public class CourseResultsServlet extends HttpServlet {
 		else
 			resp.sendRedirect(PATH + "view_courses_results.jsp?from=" + DELETED_UNSUCCESS);
 	}
+
 }

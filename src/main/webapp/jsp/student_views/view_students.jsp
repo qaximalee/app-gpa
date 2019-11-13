@@ -39,6 +39,8 @@
 		HCrudOperations<Student> hStdOprt = new StudentDAO();
 		List<Student> hStdList = hStdOprt.getAll();
 		request.setAttribute("list", hStdList);
+		
+		
 	%>
 
 	<div class="container">

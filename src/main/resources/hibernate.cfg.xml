@@ -28,5 +28,7 @@
         <mapping class="com.ihsinformatics.gpaconvertor.hbentities.Semester" />
         <mapping class="com.ihsinformatics.gpaconvertor.hbentities.Lookup" />
         <mapping class="com.ihsinformatics.gpaconvertor.hbentities.Course" />
+        <mapping class="com.ihsinformatics.gpaconvertor.hbentities.CourseResults" />
+        <mapping class="com.ihsinformatics.gpaconvertor.hbentities.SemesterResults" />
     </session-factory>
 </hibernate-configuration>

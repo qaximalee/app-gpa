@@ -25,6 +25,11 @@ public class Student {
 	@Column(name = "registration_no")
 	private String registrationNo;
 
+	/*
+	 * @OneToMany(mappedBy = "students") private List<SemesterResults>
+	 * semesterReults;
+	 */
+
 	public Student() {
 	}
 

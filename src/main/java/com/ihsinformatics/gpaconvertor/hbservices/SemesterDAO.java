@@ -32,7 +32,7 @@ public class SemesterDAO implements HCrudOperations<Semester> {
 		Semester student = new Semester();
 		try (Session session = HibernateUtils.getSessionFactory().openSession()) {
 			String hql = "FROM Semester Sem WHERE Sem.semesterId = :semester_id";
-			Query<Semester> query = session.createQuery(hql);
+			Query<Semester> query = session.createQuery(hql, Semester.class);
 			query.setParameter("semester_id", id);
 			student = query.getSingleResult();// query.list();
 		} catch (Exception e) {

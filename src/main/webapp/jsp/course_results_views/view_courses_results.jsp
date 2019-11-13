@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 
+<%@page import="com.ihsinformatics.gpaconvertor.services.CourseResultsService"%>
+<%@page import="java.util.List"%>
+<%@page import="com.ihsinformatics.gpaconvertor.hbservices.CourseResultsDAO"%>
 <%@page import="com.ihsinformatics.gpaconvertor.pojo.CourseResultsPOJO"%>
 <html>
 <head>
@@ -22,9 +25,6 @@
 </head>
 <body>
 	<jsp:include page="../header/nav_bar.jsp"></jsp:include>
-	<%@page
-		import="com.ihsinformatics.gpaconvertor.services.CourseResultsService, com.ihsinformatics.gpaconvertor.entities.CourseResults,
- com.ihsinformatics.gpaconvertor.interfaces.ICrudOperations, java.util.List"%>
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 	<div class="container">
 		<h1>Courses Results List</h1>

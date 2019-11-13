@@ -11,10 +11,7 @@
 <body>
 	<h2>CGPA Calculator System</h2>
 	<jsp:include page="jsp/header/nav_bar.jsp"></jsp:include>
-	<form action="DemoServlet" method="GET">
-		<input type="text" placeHolder="Enter Value" id="data" name="data" />
-		<button>Send Data</button>
-	</form>
+	
 </body>
 
 </html>

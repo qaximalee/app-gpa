@@ -69,6 +69,12 @@ public class StudentServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+
+		String url = request.getContextPath();
+		String url1 = request.getServletPath();
+
+		System.out.println(url1 + "------------------------------------------------");
+
 		String firstName = request.getParameter("firstName");
 		String lastName = request.getParameter("lastName");
 		String registrationNo = request.getParameter("registrationNo");

@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<%@page import="com.ihsinformatics.gpaconvertor.hbservices.StudentDAO"%>
+<%@page import="com.ihsinformatics.gpaconvertor.hbservices.SemesterDAO"%>
+<%@page import="com.ihsinformatics.gpaconvertor.interfaces.HCrudOperations"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -15,15 +18,10 @@
 
 <jsp:include page="../header/nav_bar.jsp"></jsp:include>
 	<%@page
-		import="com.ihsinformatics.gpaconvertor.services.SemesterService, com.ihsinformatics.gpaconvertor.entities.Semester,
- 		com.ihsinformatics.gpaconvertor.interfaces.ICrudOperations, java.util.List, 
- 		com.ihsinformatics.gpaconvertor.services.StudentService, com.ihsinformatics.gpaconvertor.entities.Student"%>
+		import=" com.ihsinformatics.gpaconvertor.hbentities.Semester, java.util.List, 
+ 		 com.ihsinformatics.gpaconvertor.hbentities.Student"%>
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-
-	<%@page
-		import="com.ihsinformatics.gpaconvertor.services.StudentService, com.ihsinformatics.gpaconvertor.entities.Student
- 	"%>
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 
@@ -32,12 +30,12 @@
 		<h1>Add Semester Results</h1>
 
 		<%
-			ICrudOperations<Semester> semesterOprt = new SemesterService();
+			HCrudOperations<Semester> semesterOprt = new SemesterDAO();
 
 			List<Semester> semesterList = semesterOprt.getAll();
 			request.setAttribute("semesterList", semesterList);
 
-			ICrudOperations<Student> studentOprt = new StudentService();
+			HCrudOperations<Student> studentOprt = new StudentDAO();
 
 			List<Student> studentList = studentOprt.getAll();
 			request.setAttribute("studentList", studentList);
@@ -45,7 +43,7 @@
 			
 		%>
 
-		<form action="add_semester_results.jsp" method="post">
+		<form action="../../SemesterResultsServlet" method="post">
 			<div class="form-group">
 				<label for="studentId">Student Id:</label> <select name="studentId"
 					required>
@@ -66,7 +64,6 @@
 			</div>
 			<button type="submit" class="btn btn-default">Create Semester Results</button>
 		</form>
-
 	</div>
 	
 	

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <%@page import="com.ihsinformatics.gpaconvertor.pojo.SemesterResultsPOJO"%>
 <%@page import="java.util.List"%>
-<%@page import="com.ihsinformatics.gpaconvertor.services.SemesterResultsService"%>
+<%@page import="com.ihsinformatics.gpaconvertor.hbservices.SemesterResultsDAO"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
@@ -27,7 +27,7 @@
 	<%		
 		} 
 	
-		SemesterResultsService semResOprt = new SemesterResultsService();
+		SemesterResultsDAO semResOprt = new SemesterResultsDAO();
 
 		List<SemesterResultsPOJO> list = semResOprt.getAllReadableResults();
 		request.setAttribute("list", list);

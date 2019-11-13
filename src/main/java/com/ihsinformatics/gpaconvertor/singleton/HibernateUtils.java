@@ -5,6 +5,8 @@ import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
 
 public class HibernateUtils {
 	private static StandardServiceRegistry registry;
@@ -12,6 +14,7 @@ public class HibernateUtils {
 
 	public static SessionFactory getSessionFactory() {
 		if (sessionFactory == null) {
+			// sessionFactory = getSessionFactoryByOtherMethod();
 			try {
 				registry = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
 
@@ -27,6 +30,16 @@ public class HibernateUtils {
 				}
 			}
 		}
+		return sessionFactory;
+	}
+
+	private static SessionFactory getSessionFactoryByOtherMethod() {
+		// TODO Auto-generated method stub
+
+		Configuration config = new Configuration();
+		config.configure("hibernate.cfg.xml");
+		ServiceRegistry serviceReg = new StandardServiceRegistryBuilder().applySettings(config.getProperties()).build();
+		SessionFactory sessionFactory = config.buildSessionFactory(serviceReg);
 		return sessionFactory;
 	}
 

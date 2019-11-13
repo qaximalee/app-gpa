@@ -1,6 +1,12 @@
 <!DOCTYPE html>
-<%@page import="com.ihsinformatics.gpaconvertor.services.SemesterService"%>
-<%@page import="com.ihsinformatics.gpaconvertor.entities.Semester"%>
+<%@page import="com.ihsinformatics.gpaconvertor.hbservices.SemesterDAO"%>
+<%@page import="com.ihsinformatics.gpaconvertor.hbentities.Semester"%>
+<%@page import="com.ihsinformatics.gpaconvertor.hbentities.Student"%>
+<%@page import="java.util.List"%>
+<%@page import="com.ihsinformatics.gpaconvertor.hbentities.Course"%>
+<%@page import="com.ihsinformatics.gpaconvertor.hbservices.StudentDAO"%>
+<%@page import="com.ihsinformatics.gpaconvertor.hbservices.CourseDAO"%>
+<%@page import="com.ihsinformatics.gpaconvertor.interfaces.HCrudOperations"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -15,34 +21,24 @@
 </head>
 <body>
 <jsp:include page="../header/nav_bar.jsp"></jsp:include>
-	<%@page
-		import="com.ihsinformatics.gpaconvertor.services.CourseService, com.ihsinformatics.gpaconvertor.entities.Course,
- 	com.ihsinformatics.gpaconvertor.interfaces.ICrudOperations, java.util.List"%>
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
-
-	<%@page
-		import="com.ihsinformatics.gpaconvertor.services.StudentService, com.ihsinformatics.gpaconvertor.entities.Student
- 	"%>
-	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
 
 	<div class="container">
 		<a href="view_courses_results.jsp" style="float:right">View All Courses Results</a>
 		<h1>Add Course Results</h1>
 
 		<%
-			ICrudOperations<Course> courseOprt = new CourseService();
+			HCrudOperations<Course> courseOprt = new CourseDAO();
 
 			List<Course> courseList = courseOprt.getAll();
 			request.setAttribute("courseList", courseList);
 
-			ICrudOperations<Student> studentOprt = new StudentService();
+			HCrudOperations<Student> studentOprt = new StudentDAO();
 
 			List<Student> studentList = studentOprt.getAll();
 			request.setAttribute("studentList", studentList);
 			
-			ICrudOperations<Semester> semesterOprt = new SemesterService();
+			HCrudOperations<Semester> semesterOprt = new SemesterDAO();
 			List<Semester> semesterList = semesterOprt.getAll();
 			request.setAttribute("semesterList", semesterList);
 		%>
