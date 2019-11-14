@@ -30,5 +30,9 @@
         <mapping class="com.ihsinformatics.gpaconvertor.hbentities.Course" />
         <mapping class="com.ihsinformatics.gpaconvertor.hbentities.CourseResults" />
         <mapping class="com.ihsinformatics.gpaconvertor.hbentities.SemesterResults" />
+        
+        <!-- These Classes are just for Results Readability -->
+        <mapping class="com.ihsinformatics.gpaconvertor.pojo.CourseResultsPOJO" />
+        <mapping class="com.ihsinformatics.gpaconvertor.pojo.SemesterResultsPOJO" />
     </session-factory>
 </hibernate-configuration>

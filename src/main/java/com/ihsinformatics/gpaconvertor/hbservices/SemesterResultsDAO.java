@@ -150,12 +150,13 @@ public class SemesterResultsDAO implements HCrudOperations<SemesterResults> {
 		return 0.0;
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<SemesterResultsPOJO> getAllReadableResults() {
 
 		List<SemesterResultsPOJO> semResults = new ArrayList<>();
 		try (Session session = HibernateUtils.getSessionFactory().openSession()) {
-			Query query = session.createSQLQuery("CALL getAllSemesterResults()").addEntity(CourseResults.class);
-			semResults = query.list();
+			semResults = session.createSQLQuery("CALL getAllSemesterResults()").addEntity(SemesterResultsPOJO.class)
+					.list();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

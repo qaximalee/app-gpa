@@ -1,15 +1,41 @@
 package com.ihsinformatics.gpaconvertor.pojo;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class CourseResultsPOJO {
+
+	@Id
+	@Column(name = "course_result_id")
 	private int courseResultId;
+
+	@Column(name = "first_name")
 	private String firstName;
+
+	@Column(name = "last_name")
 	private String lastName;
+
+	@Column(name = "registration_no")
 	private String registrationNo;
+
+	@Column(name = "name")
 	private String courseName;
+
+	@Column(name = "semester_no")
 	private int semesterNo;
+
+	@Column(name = "percentage")
 	private double percentage;
+
+	@Column(name = "gpa")
 	private double gpa;
+
+	@Column(name = "grade")
 	private String grade;
+
+	@Column(name = "total_points")
 	private double totalPoints;
 
 	public CourseResultsPOJO() {

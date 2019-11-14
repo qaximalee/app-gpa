@@ -19,7 +19,7 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
-<body>
+<body onload="getSem(), getStudent()">
 <jsp:include page="../header/nav_bar.jsp"></jsp:include>
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
@@ -44,7 +44,6 @@
 		%>
 
 		<form action="../../CourseResultsServlet" method="post">
-			<input type="hidden" name="actionType" value="add"/>
 			<div class="form-group">
 				<label for="studentId">Student Id:</label> <select name="studentId" id="studentId" onchange="getStudent()"
 					required>
@@ -88,9 +87,13 @@
 		</form>
 	</div>
 	<script type="text/javascript">
+	
+		/*
+			This function fetch Courses by semesterId and Fill the dropdown on selecting the Semester
+		*/
 		function getSem(){
 			var s = document.getElementById("semesterId");
-			var selNum = s.options[s.selectedIndex].value;
+			var semNum = s.options[s.selectedIndex].value;
 			let dropdown = $('#courseId');
 
 			dropdown.empty();
@@ -98,7 +101,7 @@
 			dropdown.append('<option selected="true" disabled>Choose Course</option>');
 			dropdown.prop('selectedIndex', 0);
 
-			const url = "getCoursesBySemester.jsp?semesterID="+selNum;
+			const url = "../../getCoursesBySemester?semesterID="+semNum;
 
 			// Populate dropdown with list of provinces
 			$.getJSON(url, function (data) {
@@ -107,10 +110,15 @@
 			  })
 			});
 		}
+		
+		/*
+			This function fetch Student full name by selecting the Registration No from the dropdown.
+		*/
 		function getStudent(){
 			var std = document.getElementById("studentId");
-			var stdId = std.options[std.selectedIndex].value;
-			const url = "getStudentByRegistration.jsp?studentID="+stdId;
+			var stdId = std.options[std.selectedIndex].value; 
+			
+			const url = "../../getStudentByRegistration?studentID="+stdId;
 
 			// Populate dropdown with list of provinces
 			$.getJSON(url, function (data) {

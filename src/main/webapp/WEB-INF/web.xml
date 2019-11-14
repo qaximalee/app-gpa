@@ -40,6 +40,9 @@
   <servlet-mapping>
     <servlet-name>CourseResultsServlet</servlet-name>
     <url-pattern>/CourseResultsServlet</url-pattern>
+    <url-pattern>/deleteCourseResults</url-pattern>
+    <url-pattern>/getCoursesBySemester</url-pattern>
+    <url-pattern>/getStudentByRegistration</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>

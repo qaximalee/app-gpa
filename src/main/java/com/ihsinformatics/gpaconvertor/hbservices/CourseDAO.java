@@ -106,4 +106,16 @@ public class CourseDAO implements HCrudOperations<Course> {
 
 		return saved;
 	}
+
+	public List<Course> getCoursesBySemester(int semesterId) {
+		List<Course> courses = new ArrayList<>();
+		try (Session session = HibernateUtils.getSessionFactory().openSession()) {
+			courses = session.createQuery("from Course Cr WHERE Cr.semester.semesterId = :semesterID", Course.class)
+					.setParameter("semesterID", semesterId).list();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return courses;
+	}
 }

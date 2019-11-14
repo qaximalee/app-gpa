@@ -14,7 +14,8 @@ import com.ihsinformatics.gpaconvertor.hbservices.SemesterDAO;
 import com.ihsinformatics.gpaconvertor.interfaces.HCrudOperations;
 
 /**
- * Servlet implementation class CourseServlet
+ * Servlet implementation class CourseServlet It will provide all Operations on
+ * Course Entity
  */
 public class CourseServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

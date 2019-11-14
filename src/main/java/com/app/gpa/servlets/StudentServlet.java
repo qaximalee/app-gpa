@@ -12,7 +12,8 @@ import com.ihsinformatics.gpaconvertor.hbservices.StudentDAO;
 import com.ihsinformatics.gpaconvertor.interfaces.HCrudOperations;
 
 /**
- * Servlet implementation class DemoServlet
+ * Servlet implementation class StudentServlet It will provide all Operations on
+ * Student Entity
  */
 public class StudentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

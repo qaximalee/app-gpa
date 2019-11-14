@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 
-<%@page import="com.ihsinformatics.gpaconvertor.services.CourseResultsService"%>
 <%@page import="java.util.List"%>
 <%@page import="com.ihsinformatics.gpaconvertor.hbservices.CourseResultsDAO"%>
 <%@page import="com.ihsinformatics.gpaconvertor.pojo.CourseResultsPOJO"%>
@@ -36,10 +35,12 @@
 			value="<%=request.getParameter("from")%>">
 		<%
 			}
-			CourseResultsService courseOprt = new CourseResultsService();
-
-			List<CourseResultsPOJO> list = courseOprt.getAllReadableResults();
-			request.setAttribute("list", list);
+			
+			
+			CourseResultsDAO courseResultsOprt = new CourseResultsDAO();
+			
+			List<CourseResultsPOJO> lists = courseResultsOprt.getAllReadableResults();
+			request.setAttribute("lists", lists);
 		%>
 		<table class="table table-striped">
 			<thead>
@@ -56,7 +57,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${list}" var="courseResults">
+				<c:forEach items="${lists}" var="courseResults">
 					<tr>
 						<td>${courseResults.getFirstName()}</td>
 						<td>${courseResults.getLastName()}</td>
@@ -69,7 +70,7 @@
 						<td>${courseResults.getTotalPoints()}</td>
 						
 						<td><a
-							href="../../CourseResultsServlet?actionType=delete&id=${courseResults.getCourseResultId()}"
+							href="../../deleteCourseResults?id=${courseResults.getCourseResultId()}"
 							id="delete">Delete</a></td>
 					</tr>
 				</c:forEach>

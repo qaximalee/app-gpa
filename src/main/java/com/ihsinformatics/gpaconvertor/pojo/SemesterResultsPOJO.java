@@ -1,18 +1,41 @@
 package com.ihsinformatics.gpaconvertor.pojo;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class SemesterResultsPOJO {
-	private int semesterResultId;
+
+	@Id
+	@Column(name = "semester_results_id")
+	private int semesterResultsId;
+
+	@Column(name = "first_name")
 	private String firstName;
+
+	@Column(name = "last_name")
 	private String lastName;
+
+	@Column(name = "registration_no")
 	private String registrationNo;
+
+	@Column(name = "semester_no")
 	private int semesterNo;
+
+	@Column(name = "semester_gpa")
 	private double semesterGPA;
+
+	@Column(name = "cgpa")
 	private double cGPA;
 
-	public SemesterResultsPOJO(int semesterResultId, String firstName, String lastName, String registrationNo,
+	public SemesterResultsPOJO() {
+	}
+
+	public SemesterResultsPOJO(int semesterResultsId, String firstName, String lastName, String registrationNo,
 			int semesterNo, double semesterGPA, double cGPA) {
 		super();
-		this.semesterResultId = semesterResultId;
+		this.semesterResultsId = semesterResultsId;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.registrationNo = registrationNo;
@@ -21,12 +44,12 @@ public class SemesterResultsPOJO {
 		this.cGPA = cGPA;
 	}
 
-	public int getSemesterResultId() {
-		return semesterResultId;
+	public int getSemesterResultsId() {
+		return semesterResultsId;
 	}
 
-	public void setSemesterResultId(int semesterResultId) {
-		this.semesterResultId = semesterResultId;
+	public void setSemesterResultsId(int semesterResultId) {
+		this.semesterResultsId = semesterResultId;
 	}
 
 	public String getFirstName() {

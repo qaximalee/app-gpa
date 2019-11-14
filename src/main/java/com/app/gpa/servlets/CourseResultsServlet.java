@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import com.ihsinformatics.gpaconvertor.hbentities.Course;
 import com.ihsinformatics.gpaconvertor.hbentities.CourseResults;
 import com.ihsinformatics.gpaconvertor.hbentities.Lookup;
@@ -19,7 +22,8 @@ import com.ihsinformatics.gpaconvertor.hbservices.StudentDAO;
 import com.ihsinformatics.gpaconvertor.interfaces.HCrudOperations;
 
 /**
- * Servlet implementation class CourseResultsServlet
+ * Servlet implementation class CourseResultsServlet It will provide all
+ * Operations on CourseResults Entity
  */
 public class CourseResultsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -57,11 +61,59 @@ public class CourseResultsServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		// response.getWriter().append("Served at: ").append(request.getContextPath());
-		if (request.getParameter("actionType").equals("delete")) {
-			doDelete(request, response);
-		} else {
+		String path = request.getServletPath();
 
+		if (path.equals("/deleteCourseResults")) {
+			doDelete(request, response);
+		} else if (path.equals("/getCoursesBySemester")) {
+			getCoursesBySemester(request, response);
+		} else if (path.equals("/getStudentByRegistration")) {
+			getStudentByRegistration(request, response);
+		}
+	}
+
+	/*
+	 * This will output JSONObject of Student, It is used in add_course_results.jsp
+	 * file. And used for populating Student Name in a h3 tag by Selecting
+	 * Registration No.
+	 */
+	private void getStudentByRegistration(HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		int studentID = Integer.parseInt(request.getParameter("studentID"));
+
+		HCrudOperations<Student> courseOprt = new StudentDAO();
+		Student students = courseOprt.getSingle(studentID);
+
+		JSONObject studentJson = new JSONObject(students);
+
+		try {
+			response.getWriter().print(studentJson.toString());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.out.println("JSON of Student by registration is not generated");
+			e.printStackTrace();
+		}
+	}
+
+	/*
+	 * This will output JSONArray of Course, It is used in add_course_results.jsp
+	 * file. And used for populating Course Name in a drop-down by Selecting
+	 * Semester.
+	 */
+	private void getCoursesBySemester(HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		int semesterID = Integer.parseInt(request.getParameter("semesterID"));
+
+		CourseDAO courseOprt = new CourseDAO();
+		List<Course> courses = courseOprt.getCoursesBySemester(semesterID);
+
+		JSONArray courseJson = new JSONArray(courses);
+
+		try {
+			response.getWriter().print(courseJson.toString());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 

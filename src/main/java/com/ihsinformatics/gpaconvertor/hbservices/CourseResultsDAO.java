@@ -123,10 +123,12 @@ public class CourseResultsDAO implements HCrudOperations<CourseResults> {
 		return courseResults;
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<CourseResultsPOJO> getAllReadableResults() {
 		List<CourseResultsPOJO> courseResults = new ArrayList<>();
 		try (Session session = HibernateUtils.getSessionFactory().openSession()) {
-			courseResults = session.createSQLQuery("CALL getAllCourseResults()").list();
+			courseResults = session.createSQLQuery("CALL getAllCourseResults()").addEntity(CourseResultsPOJO.class)
+					.list();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

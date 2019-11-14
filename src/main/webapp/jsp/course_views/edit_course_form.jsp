@@ -1,4 +1,10 @@
 <!DOCTYPE html>
+<%@page import="java.util.List"%>
+<%@page import="com.ihsinformatics.gpaconvertor.hbentities.Semester"%>
+<%@page import="com.ihsinformatics.gpaconvertor.hbservices.SemesterDAO"%>
+<%@page import="com.ihsinformatics.gpaconvertor.hbservices.CourseDAO"%>
+<%@page import="com.ihsinformatics.gpaconvertor.hbentities.Course"%>
+<%@page import="com.ihsinformatics.gpaconvertor.interfaces.HCrudOperations"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -13,22 +19,16 @@
 </head>
 <body>
 <jsp:include page="../header/nav_bar.jsp"></jsp:include>
-	<%@page
-		import="com.ihsinformatics.gpaconvertor.services.CourseService, com.ihsinformatics.gpaconvertor.entities.Course,
- com.ihsinformatics.gpaconvertor.interfaces.ICrudOperations"%>
-	<%@page
-		import="com.ihsinformatics.gpaconvertor.services.SemesterService, com.ihsinformatics.gpaconvertor.entities.Semester,
- 	com.ihsinformatics.gpaconvertor.interfaces.ICrudOperations, java.util.List"%>
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 	<%
 		String id = request.getParameter("id");
-		ICrudOperations<Course> courseOprt = new CourseService();
+		HCrudOperations<Course> courseOprt = new CourseDAO();
 		Course course = courseOprt.getSingle(Integer.parseInt(id));
 	%>
 
 	<%
-		ICrudOperations<Semester> semesterOprt = new SemesterService();
+		HCrudOperations<Semester> semesterOprt = new SemesterDAO();
 
 		List<Semester> list = semesterOprt.getAll();
 		request.setAttribute("list", list);

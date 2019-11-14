@@ -45,7 +45,7 @@
 
 		<form action="../../SemesterResultsServlet" method="post">
 			<div class="form-group">
-				<label for="studentId">Student Id:</label> <select name="studentId"
+				<label for="studentId">Student Id:</label> <select name="studentId" id="studentId" onchange="getStudent()"
 					required>
 					<c:forEach items="${studentList}" var="student">
 						<option value='<c:out value="${student.getStudentId()}"/>'><c:out
@@ -53,6 +53,7 @@
 					</c:forEach>
 				</select>
 			</div>
+			<h3 id="studName">Choose Student Registration NO...</h3>
 			<div class="form-group">
 				<label for="semesterId">Semester Id:</label> <select
 					name="semesterId" required>
@@ -66,6 +67,21 @@
 		</form>
 	</div>
 	
+	<script>
+		function getStudent(){
+			var std = document.getElementById("studentId");
+			var stdId = std.options[std.selectedIndex].value;
+			const url = "../../getStudentByRegistration?studentID="+stdId;
 	
+			// Populate dropdown with list of provinces
+			$.getJSON(url, function (data) {
+				var studentDetails = "Full Name: "+data.firstName+" "+data.lastName;
+				$('#studName').text(studentDetails);
+				document.getElementById("studName").text = ""+data.firstName+" "+data.lastName;
+				console.log(data.firstName+" "+data.lastName);
+			});
+			
+		}
+	</script>
 </body>
 </html>

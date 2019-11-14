@@ -31,6 +31,7 @@
 
 		List<SemesterResultsPOJO> list = semResOprt.getAllReadableResults();
 		request.setAttribute("list", list);
+		
 	%>
 
 	<div class="container">
