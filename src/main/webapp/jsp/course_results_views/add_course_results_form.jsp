@@ -79,9 +79,9 @@
 				</select>
 			</div>
 			<div class="form-group">
-				<label for="percentage">Percentage:</label> <input type="text"
+				<label for="percentage">Percentage:</label> <input type="number" min="0" max="100"
 					class="form-control" id="percentage" placeholder="Enter Percentage"
-					name="percentage">
+					name="percentage" required>
 			</div>
 			<button type="submit" class="btn btn-default">Create Course Results</button>
 		</form>

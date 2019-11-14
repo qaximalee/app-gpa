@@ -30,12 +30,12 @@
 			<div class="form-group">
 				<label for="firstName">First Name:</label> <input type="text"
 					class="form-control" id="firstName" placeholder="Enter First Name"
-					name="firstName" required>
+					name="firstName" onchange="nameValidation(this.value)" required>
 			</div>
 			<div class="form-group">
 				<label for="lastName">Last Name:</label> <input type="text"
 					class="form-control" id="lastName" placeholder="Enter Last Name"
-					name="lastName" required>
+					name="lastName" onchange="nameValidation(this.value)" required>
 			</div>
 			<div class="form-group">
 				<label for="registrationNo">Registration No:</label> <input type="text"
@@ -47,6 +47,14 @@
 		</form>
 	</div>
 	<script type="text/javascript">
+	
+		function nameValidation(value){
+			var regName = /^[a-zA-Z]+$/;
+			var name = value;
+			if(!regName.test(name) && name != ""){
+				alertify.alert("Please Enter Valid Name:");
+			}
+		}
 	
 		var isValidated = true;
 		
