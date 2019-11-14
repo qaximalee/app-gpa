@@ -92,9 +92,10 @@ public class SemesterResultsServlet extends HttpServlet {
 		SemesterResults semesterResults = new SemesterResults(0, semester, student, semesterGPA, semesterGPA);
 
 		if (semesterResultsOprt.save(semesterResults))
-			response.sendRedirect(PATH + "view_semester_results.jsp?from=" + CREATED_SUCCESS);
+			response.sendRedirect(PATH + "view_std_semester_results.jsp?id=" + studentId + "&from=" + CREATED_SUCCESS);
 		else
-			response.sendRedirect(PATH + "view_semester_results.jsp?from=" + CREATED_UNSUCCESS);
+			response.sendRedirect(
+					PATH + "view_std_semester_results.jsp?id=" + studentId + "&from=" + CREATED_UNSUCCESS);
 
 	}
 

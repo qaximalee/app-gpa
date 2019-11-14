@@ -30,39 +30,65 @@
 			<div class="form-group">
 				<label for="firstName">First Name:</label> <input type="text"
 					class="form-control" id="firstName" placeholder="Enter First Name"
-					name="firstName" onchange="nameValidation(this.value)" required>
+					name="firstName" onchange="fnameValidation(this.value)" required>
+				<span class="error"><p id="fname_error"></p></span>
 			</div>
 			<div class="form-group">
 				<label for="lastName">Last Name:</label> <input type="text"
 					class="form-control" id="lastName" placeholder="Enter Last Name"
-					name="lastName" onchange="nameValidation(this.value)" required>
+					name="lastName" onchange="lnameValidation(this.value)" required>
+					<span class="error"><p id="lname_error"></p></span>
 			</div>
 			<div class="form-group">
 				<label for="registrationNo">Registration No:</label> <input type="text"
 					class="form-control" id="registrationNo"
 					placeholder="Enter Registration No" name="registrationNo"
-					onchange="return isRegNoValid()">
+					onchange="return isRegNoValid()" required>
+					<span class="error"><p id="reg_no_error"></p></span>
 			</div>
 			<button type="submit" class="btn btn-default">Create Student</button>
 		</form>
 	</div>
 	<script type="text/javascript">
 	
-		function nameValidation(value){
+		var isValidated = true;
+	
+		function fnameValidation(value){
 			var regName = /^[a-zA-Z]+$/;
 			var name = value;
-			if(!regName.test(name) && name != ""){
-				alertify.alert("Please Enter Valid Name:");
+			document.getElementById('fname_error').innerHTML = '';
+			if(!regName.test(name)){
+				document.getElementById('fname_error').innerHTML = 'Enter Correct First Name';
+				isValidated = false;
+			}else if(name == ""){
+				document.getElementById('fname_error').innerHTML = 'First Name should be filled';
+				isValidated = false;
 			}
 		}
-	
-		var isValidated = true;
+		
+		function lnameValidation(value){
+			var regName = /^[a-zA-Z]+$/;
+			var name = value;
+			document.getElementById('lname_error').innerHTML = '';
+			if(!regName.test(name)){
+				document.getElementById('lname_error').innerHTML = 'Enter Correct Last Name';
+				isValidated = false;
+			}else if(name == ""){
+				document.getElementById('lname_error').innerHTML = 'Last Name should be filled';
+				isValidated = false;
+			}
+		}
 		
 		function isRegNoValid() {
 			var value = document.getElementById("registrationNo").value;
 			var ins = value.search(/^EP-\d{7}$/);
+			document.getElementById('reg_no_error').innerHTML = '';
 			if (ins != 0) {
-				alertify.alert("Please Enter Correct Registration No:");
+				document.getElementById('reg_no_error').innerHTML = 'Enter Correct Registration No (i.e EP-1234567)';
+				isValidated = false;
+				return false; 
+			}else if(value == ""){
+				document.getElementById('reg_no_error').innerHTML = 'Registration No should be filled';
 				isValidated = false;
 				return false;
 			}

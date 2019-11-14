@@ -163,4 +163,18 @@ public class SemesterResultsDAO implements HCrudOperations<SemesterResults> {
 
 		return semResults;
 	}
+
+	@SuppressWarnings("unchecked")
+	public List<SemesterResultsPOJO> getStudentSemResults(int studentId) {
+
+		List<SemesterResultsPOJO> semResults = new ArrayList<>();
+		try (Session session = HibernateUtils.getSessionFactory().openSession()) {
+			semResults = session.createSQLQuery("Call getStudentSemResults(:studentID)")
+					.setParameter("studentID", studentId).addEntity(SemesterResultsPOJO.class).list();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return semResults;
+	}
 }
