@@ -53,5 +53,17 @@
   <servlet-mapping>
     <servlet-name>SemesterResultsServlet</servlet-name>
     <url-pattern>/SemesterResultsServlet</url-pattern>
+    <url-pattern>/GetResultByStudent</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ResultServlet</display-name>
+    <servlet-name>ResultServlet</servlet-name>
+    <servlet-class>com.app.gpa.servlets.ResultServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ResultServlet</servlet-name>
+    <url-pattern>/ResultServlet</url-pattern>
+    <url-pattern>/ResultsAvailable</url-pattern>
   </servlet-mapping>
 </web-app>

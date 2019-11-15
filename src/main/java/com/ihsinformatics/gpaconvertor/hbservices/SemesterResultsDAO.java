@@ -177,4 +177,37 @@ public class SemesterResultsDAO implements HCrudOperations<SemesterResults> {
 
 		return semResults;
 	}
+
+	public boolean getSemesterResultsBy(int studentId, int semesterId) {
+		// TODO Auto-generated method stub
+
+		SemesterResults semesterResults = new SemesterResults();
+		try (Session session = HibernateUtils.getSessionFactory().openSession()) {
+			String hql = "FROM SemesterResults Std WHERE Std.semester.semesterId = :semesterID AND Std.student.studentId = :studentID";
+			Query<SemesterResults> query = session.createQuery(hql, SemesterResults.class);
+			query.setParameter("semesterID", semesterId);
+			query.setParameter("studentID", studentId);
+			semesterResults = query.getSingleResult();// query.list();
+			if (semesterResults.getSemester() != null) {
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+
+		return false;
+	}
+
+	public List<SemesterResults> getSemResEntityByStudent(int studentId) {
+		List<SemesterResults> semesterResults = new ArrayList<>();
+		try (Session session = HibernateUtils.getSessionFactory().openSession()) {
+			String hql = "FROM SemesterResults Std WHERE Std.student.studentId = :student_id";
+			semesterResults = session.createQuery(hql, SemesterResults.class).setParameter("student_id", studentId)
+					.list();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return semesterResults;
+	}
 }

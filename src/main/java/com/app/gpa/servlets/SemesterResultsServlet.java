@@ -1,12 +1,15 @@
 package com.app.gpa.servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.json.JSONObject;
 
 import com.ihsinformatics.gpaconvertor.hbentities.CourseResults;
 import com.ihsinformatics.gpaconvertor.hbentities.Semester;
@@ -17,6 +20,7 @@ import com.ihsinformatics.gpaconvertor.hbservices.SemesterDAO;
 import com.ihsinformatics.gpaconvertor.hbservices.SemesterResultsDAO;
 import com.ihsinformatics.gpaconvertor.hbservices.StudentDAO;
 import com.ihsinformatics.gpaconvertor.interfaces.HCrudOperations;
+import com.ihsinformatics.gpaconvertor.pojo.Result;
 
 /**
  * Servlet implementation class SemesterResultsServlet It will provide all
@@ -33,6 +37,8 @@ public class SemesterResultsServlet extends HttpServlet {
 	private static final String PATH = "jsp/semester_results_views/";
 	private static final String CREATED_SUCCESS = "from-create";
 	private static final String CREATED_UNSUCCESS = "from-create-error";
+
+	private static final int CREDIT_HOUR = 3;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -54,7 +60,65 @@ public class SemesterResultsServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String path = request.getServletPath();
+		if (path.equals("/GetResultByStudent")) {
+			getSemesterResultByStudent(request, response);
+		}
+	}
+
+	private void getSemesterResultByStudent(HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		int studentId = Integer.parseInt(request.getParameter("id"));
+
+		SemesterResultsDAO semResOprt = new SemesterResultsDAO();
+		CourseResultsDAO courseResOprt = new CourseResultsDAO();
+		List<SemesterResults> list = semResOprt.getSemResEntityByStudent(studentId);
+		List<Result> results = new ArrayList<>();
+		String message = "NOT-NULL";
+		if (list.size() <= 0) {
+			message = "NULL";
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("message", message);
+			jsonObject.put("results", new ArrayList<>());
+
+			try {
+				response.getWriter().print(jsonObject.toString());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				System.out.println("------------============= RESULTSERVLET JSON ERROR =============---------------");
+				e.printStackTrace();
+			}
+			return;
+		}
+
+		int counter = 0;
+		while (counter < list.size()) {
+			List<CourseResults> courseResults = courseResOprt
+					.getAllCourseResultsBySemester(list.get(counter).getSemester().getSemesterId(), studentId);
+			for (CourseResults courseResult : courseResults) {
+				Result result = new Result(list.get(counter).getSemesterResultId(),
+						courseResult.getCourse().getCourseCode(), courseResult.getCourse().getName(),
+						list.get(counter).getSemester().getSemesterNo(), courseResult.getPercentage(), CREDIT_HOUR,
+						courseResult.getGpa(), courseResult.getGrade(), courseResult.getTotalPoints(),
+						list.get(counter).getSemesterGPA(), list.get(counter).getcGPA());
+				results.add(result);
+			}
+			counter++;
+		}
+
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("message", message);
+		jsonObject.put("results", results);
+
+		// JSONArray jsonResults = new JSONArray(results);
+
+		try {
+			response.getWriter().print(jsonObject.toString());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.out.println("------------============= RESULTSERVLET JSON ERROR =============---------------");
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -91,7 +155,11 @@ public class SemesterResultsServlet extends HttpServlet {
 
 		SemesterResults semesterResults = new SemesterResults(0, semester, student, semesterGPA, semesterGPA);
 
-		if (semesterResultsOprt.save(semesterResults))
+		boolean isSemesterResultPresent = new SemesterResultsDAO().getSemesterResultsBy(studentId, semesterId);
+
+		if (isSemesterResultPresent) {
+			response.sendRedirect(PATH + "view_std_semester_results.jsp?id=" + studentId + "&from=retrieve");
+		} else if (semesterResultsOprt.save(semesterResults))
 			response.sendRedirect(PATH + "view_std_semester_results.jsp?id=" + studentId + "&from=" + CREATED_SUCCESS);
 		else
 			response.sendRedirect(
