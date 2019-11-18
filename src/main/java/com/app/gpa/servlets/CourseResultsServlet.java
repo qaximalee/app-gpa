@@ -63,11 +63,11 @@ public class CourseResultsServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String path = request.getServletPath();
 
-		if (path.equals("/deleteCourseResults")) {
+		if (path.equals("/DeleteCourseResults")) {
 			doDelete(request, response);
-		} else if (path.equals("/getCoursesBySemester")) {
+		} else if (path.equals("/GetCoursesBySemester")) {
 			getCoursesBySemester(request, response);
-		} else if (path.equals("/getStudentByRegistration")) {
+		} else if (path.equals("/GetStudentByRegistration")) {
 			getStudentByRegistration(request, response);
 		}
 	}

@@ -30,7 +30,8 @@ public class StudentDAO implements HCrudOperations<Student> {
 	public Student getSingle(int id) {
 		// TODO Auto-generated method stub
 		Student student = new Student();
-		try (Session session = HibernateUtils.getSessionFactory().openSession()) {
+		// Session session = HibernateUtils.getSessionFactory().openSession()
+		try (Session session = HibernateUtils.getHibernateSession()) {
 			String hql = "FROM Student Std WHERE Std.studentId = :student_id";
 			Query<Student> query = session.createQuery(hql);
 			query.setParameter("student_id", id);

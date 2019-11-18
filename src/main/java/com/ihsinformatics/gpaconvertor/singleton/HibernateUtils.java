@@ -1,5 +1,6 @@
 package com.ihsinformatics.gpaconvertor.singleton;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;
@@ -41,6 +42,13 @@ public class HibernateUtils {
 		ServiceRegistry serviceReg = new StandardServiceRegistryBuilder().applySettings(config.getProperties()).build();
 		SessionFactory sessionFactory = config.buildSessionFactory(serviceReg);
 		return sessionFactory;
+	}
+
+	public static Session getHibernateSession() {
+		SessionFactory sf = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+
+		final Session session = sf.openSession();
+		return session;
 	}
 
 	public static void shutdown() {

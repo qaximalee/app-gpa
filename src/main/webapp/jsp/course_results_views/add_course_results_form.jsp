@@ -101,7 +101,7 @@
 			dropdown.append('<option selected="true" disabled>Choose Course</option>');
 			dropdown.prop('selectedIndex', 0);
 
-			const url = "../../getCoursesBySemester?semesterID="+semNum;
+			const url = "../../GetCoursesBySemester?semesterID="+semNum;
 
 			// Populate dropdown with list of provinces
 			$.getJSON(url, function (data) {
@@ -118,7 +118,7 @@
 			var std = document.getElementById("studentId");
 			var stdId = std.options[std.selectedIndex].value; 
 			
-			const url = "../../getStudentByRegistration?studentID="+stdId;
+			const url = "../../GetStudentByRegistration?studentID="+stdId;
 
 			// Populate dropdown with list of provinces
 			$.getJSON(url, function (data) {
