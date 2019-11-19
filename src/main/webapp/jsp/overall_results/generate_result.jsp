@@ -72,8 +72,6 @@
 			var stdId = std.options[std.selectedIndex].value; 
 			var tableHead = ["Semester No", "Course Code", "Course Name", 
 				"Percentage", "Credit Hours", "Grade", "GPA", "Total Points", "Semester GPA", "CGPA"];
-			var tableSequence = ["semesterNo", "courseCode", "courseName", 
-				"percentage", "creditHours", "grade", "gpa", "totalPoints", "semesterGPA", "cgpa"];
 			
 			document.getElementById("error").innerHTML = "";
 
@@ -83,8 +81,7 @@
 				var resultData = data.results;
 				console.log(resultData[0]);			
 				generateTableHead(table, tableHead);
-				//generateTable(table, resultData, tableSequence);
-				generateTable1(table, resultData);
+				generateTable(table, resultData);
 
 			});
 		}
@@ -104,57 +101,23 @@
 			}
 		}
 		
-		function generateTable1(table, data) {
+		function generateTable(table, data) {
 			var tableSequence = ["semesterNo", "courseCode", "courseName", 
 				"percentage", "creditHours", "grade", "gpa", "totalPoints", "semesterGPA", "cgpa"];
-			
-			var count = [];
-			let i = 0;
-			data.forEach(function(obj) {
-				{
-					count[i] = obj.semesterNo;
-					i++;
-				}
-			})
-			
-			console.log(count);
-			let j = 1;
-			for(let i= 0; i < data.length; i ++) {
-				let row = table.insertRow();
+			var switched = false;
+			for (let i= 0; i < data.length; i++) {	
+				let row;
 				let element = data[i];
-				for(let j = 0; j < tableSequence.length-2; j++){
-					let cell = row.insertCell();
-					let text = document.createTextNode(element[tableSequence[j]]);
-					cell.appendChild(text);
-				}
-				if(data[i].semesterNo != data[i+1].semesterNo || data[i+1].semesterNo === 'undefined'){
-					let cell1 = row.insertCell();
-					let text1 = document.createTextNode(element['semesterGPA']);
-					cell1.appendChild(text1);
-					
-					let cell2 = row.insertCell();
-					let text2 = document.createTextNode(element['cgpa']);
-					cell2.appendChild(text2);
-				}
-			}
-		}
-			/* for (let element of data) {
-				
-				let row = table.insertRow();
-				let counter = 0; 
-				console.log(element.semesterNo);
-				for (key in element) {
-					console.log(element.length);
-					if(counter == tableSequence.length)
-				  		break;
-					if(counter < 8){
+				if(switched){
+					switched = false;
+					//i--;
+					//element = data[i];
+					row = table.insertRow();
+					for(var a = 0; a < tableSequence.length-2; a++){
 						let cell = row.insertCell();
-						let text = document.createTextNode(element[tableSequence[i]]);
+						let text = document.createTextNode("");
 						cell.appendChild(text);
 					}
-					counter++;
-				}
-				if(element.semesterNo != count[j] ){
 					let cell1 = row.insertCell();
 					let text1 = document.createTextNode(element['semesterGPA']);
 					cell1.appendChild(text1);
@@ -162,63 +125,32 @@
 					let cell2 = row.insertCell();
 					let text2 = document.createTextNode(element['cgpa']);
 					cell2.appendChild(text2);
+					
+				}else{
+					//element = data[i];
+					row = table.insertRow();
+					let counter = 0; 
+					//console.log(element.semesterNo);
+					for (key in element) {
+						//console.log(element.length);
+						if(counter == tableSequence.length)
+					  		break;
+						if(counter < 8){
+							let cell = row.insertCell();
+							let text = document.createTextNode(element[tableSequence[counter]]);
+							cell.appendChild(text);
+						}
+						counter++;
+					}
+					if(i == data.length-1 || element.semesterNo != data[i+1].semesterNo){
+						
+						i--;
+						switched = true;
+					}
 				}
-				j++;
 			} 
-		}*/
+		}
 	</script>
-	<!-- function generateTable(table, data, tableSequence) {
-			var semesterCompare = data[0].semesterNo;
-			
-			for (var i = 0; i < data.length; i++) {
-				let row = table.insertRow();
-
-				let cell1 = row.insertCell();
-				let text1 = document.createTextNode(data[i].semesterNo);
-				cell1.appendChild(text1);
-
-				let cell2 = row.insertCell();
-				let text2 = document.createTextNode(data[i].courseCode);
-				cell2.appendChild(text2);
-
-				let cell3 = row.insertCell();
-				let text3 = document.createTextNode(data[i].courseName);
-				cell3.appendChild(text3);
-
-				let cell4 = row.insertCell();
-				let text4 = document.createTextNode(data[i].percentage);
-				cell4.appendChild(text4);
-
-				let cell5 = row.insertCell();
-				let text5 = document.createTextNode(data[i].creditHours);
-				cell5.appendChild(text5);
-
-				let cell6 = row.insertCell();
-				let text6 = document.createTextNode(data[i].grade);
-				cell6.appendChild(text6);
-
-				let cell7 = row.insertCell();
-				let text7 = document.createTextNode(data[i].gpa);
-				cell7.appendChild(text7);
-
-				let cell8 = row.insertCell();
-				let text8 = document.createTextNode(data[i].totalPoints);
-				cell8.appendChild(text8);
-				
-				if(i <= data.length-1){
-					if(data[i].semesterNo != data[i+1].semesterNo){		
-						let cell9 = row.insertCell();
-						let text9 = document.createTextNode(data[i].semesterGPA);
-						cell9.appendChild(text9);
-	
-						let cell0 = row.insertCell();
-						let text0 = document.createTextNode(data[i].cgpa);
-						cell0.appendChild(text0);	
-						semesterCompare = data[i].semesterNo;	
-					}	
-				}
-			}
-		} -->
 </body>
 </html>
 

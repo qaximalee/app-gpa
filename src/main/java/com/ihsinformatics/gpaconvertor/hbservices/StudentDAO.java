@@ -47,7 +47,8 @@ public class StudentDAO implements HCrudOperations<Student> {
 		// TODO Auto-generated method stub
 		boolean deleted = false;
 		Transaction transaction = null;
-		try (Session session = HibernateUtils.getSessionFactory().openSession()) {
+		Session session = HibernateUtils.getHibernateSession();
+		try {
 			transaction = session.beginTransaction();
 			String hql = "DELETE FROM Student Std " + "WHERE Std.studentId = :student_id";
 			Query query = session.createQuery(hql);
@@ -57,10 +58,13 @@ public class StudentDAO implements HCrudOperations<Student> {
 			if (result == 1)
 				deleted = true;
 		} catch (Exception e) {
+			deleted = false;
 			if (transaction != null) {
 				transaction.rollback();
 			}
 			e.printStackTrace();
+		} finally {
+			session.close();
 		}
 
 		return deleted;
@@ -71,16 +75,20 @@ public class StudentDAO implements HCrudOperations<Student> {
 		// TODO Auto-generated method stub
 		boolean updated = false;
 		Transaction transaction = null;
-		try (Session session = HibernateUtils.getSessionFactory().openSession()) {
+		Session session = HibernateUtils.getHibernateSession();
+		try {
 			transaction = session.beginTransaction();
 			session.update(data);
 			transaction.commit();
 			updated = true;
 		} catch (Exception e) {
+			updated = false;
 			if (transaction != null) {
 				transaction.rollback();
 			}
 			e.printStackTrace();
+		} finally {
+			session.close();
 		}
 		return updated;
 	}
@@ -90,7 +98,10 @@ public class StudentDAO implements HCrudOperations<Student> {
 		// TODO Auto-generated method stub
 		boolean saved = false;
 		Transaction transaction = null;
-		try (Session session = HibernateUtils.getSessionFactory().openSession()) {
+		// Session session = HibernateUtils.getSessionFactory().openSession()
+		// (Session session = HibernateUtils.getHibernateSession())
+		Session session = HibernateUtils.getHibernateSession();
+		try {
 			// start a transaction
 			transaction = session.beginTransaction();
 			// save the student objects
@@ -100,10 +111,13 @@ public class StudentDAO implements HCrudOperations<Student> {
 
 			saved = true;
 		} catch (Exception e) {
+			saved = false;
 			if (transaction != null) {
 				transaction.rollback();
 			}
 			e.printStackTrace();
+		} finally {
+			session.close();
 		}
 
 		return saved;
